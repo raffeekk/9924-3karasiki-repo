@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="/css/main.min.css" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@200;400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+    <script type="module" src="/js/map.js"></script>
+    <title>ЦОДД ЛК</title>
+    <style>
+        section{
+            padding: 50px 0;
+        }
+    </style>
+</head>
+<body>
+    
+    <!--navbar-->
+    <nav class="navbar navbar-expand-sm bg-primary navbar-dark sticky-top">
+        <div class="container-fluid">
+            <a class="navbar-brand text-light" href="#">
+                <img src="/assets/logo.png" style="height: 50px;" alt="N/A" class="logo">
+                <span>ЛИЧНЫЙ КАБИНЕТ ОПЕРАТОРА <span class="text-dark fw-bold">ЦОДД</span></span>
+            </a>
+          <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasNavbar" aria-controls="offcanvasNavbar" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+          <div class="offcanvas offcanvas-end bg-primary text-light" tabindex="-1" id="offcanvasNavbar" aria-labelledby="offcanvasNavbarLabel">
+            <div class="offcanvas-header" data-bs-theme="dark">
+                <h5 class="offcanvas-title fw-bold" id="offcanvasNavbarLabel">МЕНЮ</h5>
+                <button type="button" class="btn-close border" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+            </div>
+            <div class="offcanvas-body">
+              <ul class="navbar-nav justify-content-end flex-grow-1 pe-3">
+                  <li class="nav-item">
+                      <a class="nav-link text-light fw-light fs-5" href="index">Главная</a>
+                  </li>
+                      <li class="nav-item">
+                          <a class="nav-link text-light fw-light fs-5" href="/instruction">Инструкция и документация</a>
+                      </li>
+<!--                  <li class="nav-item">-->
+<!--                    <a class="nav-link text-light fw-light fs-5" href="/instruction.html">Инструкция и документация</a>-->
+<!--                </li>-->
+              </ul>
+            </div>
+          </div>
+        </div>
+      </nav>
+
+    <!--instructions-->
+    <section id="instructions">
+        <div class="container justify-content-center col-lg-8 col-md-10">
+            <div class="text-center">
+                <p class="fs-1 fw-bold">ИНСТРУКЦИЯ ПО ИСПОЛЬЗОВАНИЮ</p>
+            </div>
+            <div class="text-center">
+                <p>В разработке, на текущий момент не реализовано или реализовано не в полной мере разделы (“Прогнозирование”, “ Генерация отчета”, “ Жалобы граждан ”)</p>
+            </div>
+            <div class="list-group">
+                <a href="#" class="list-group-item list-group-item-action" aria-disabled="true">
+                <div class="d-flex w-100 justify-content-between">
+                    <h5 class="mb-1">1. Главная страница с интерактивной картой</h5>
+                </div>
+                <p class="mb-1">Карта города с текущей транспортной ситуацией: пробки, ремонтные работы, аварии.</p>
+                <p class="mb-1">Возможность включения фильтров (например, по типу происшествия или времени суток).</p>
+                </a>
+                <a href="#" class="list-group-item list-group-item-action">
+                <div class="d-flex w-100 justify-content-between">
+                    <h5 class="mb-1">2. Добавление данных в реальном времени</h5>
+                </div>
+                <p class="mb-1">Сотрудники получаю информацию о новых инцидентах (аварии, заторы, ремонт).</p>
+                <p class="mb-1">Ввод данных о временных ограничениях движения.</p>
+                </a>
+                <a href="#" class="list-group-item list-group-item-action">
+                <div class="d-flex w-100 justify-content-between">
+                    <h5 class="mb-1">3. Прогнозирование с использованием нейросети</h5>
+                </div>
+                <p class="mb-1">На основе данных о погоде, времени суток и исторической загруженности прогнозируются возможные пробки и аварии.</p>
+                </a>
+                <a href="#" class="list-group-item list-group-item-action">
+                    <div class="d-flex w-100 justify-content-between">
+                    <h5 class="mb-1">4. Система отчетов</h5>
+                    </div>
+                    <p class="mb-1">С помощью системы “Генерации отчетов” можно получать рекомендации в зависимости от типа проблемы в текущий момент и для нужного места.</p>
+                </a>
+                <a href="#" class="list-group-item list-group-item-action">
+                    <div class="d-flex w-100 justify-content-between">
+                    <h5 class="mb-1">5. Жалобы граждан</h5>
+                    </div>
+                    <p class="mb-1">Позволяет автоматизировать прием заявок жалоб от граждан.</p>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!--documentation-->
+    <section id="instructions">
+        <div class="container justify-content-center col-lg-8 col-md-10">
+            <div class="text-center">
+                <p class="fs-1 fw-bold">ДОКУМЕНТАЦИЯ</p>
+            </div>
+            <div class="text-center">
+                <h4>Системные требования</h4>
+                <p>Работа с продуктом предназначена по средствам подключения к системе Интернет, поэтому перед началом работы необходимо иметь при себе устройство с доступом в интернет (смартфон, планшет,
+компьютер). Все взаимодействие будет происходить через web-приложение, поэтому необходимо иметь на своем устройстве любой web-браузер (он же - “браузер”), к примеру: Яндекс, Chrоme, Firefox, Safari, Edge и т.д.
+                </p>
+                <h4>Интерфейс</h4>    
+                <p>Главная страница приложения содержит интерактивную карту города с отображением текущей транспортной ситуации.
+                    На карте показаны:
+
+                    Пробки: Обозначены цветовой кодировкой (зеленый – свободно, желтый – умеренная загруженность, красный – сильная пробка, а также численного обозначение по шкале от 0 до 10.
+
+                    ДТП: Обозначены специальными иконками с указанием типа аварии и статуса.
+
+                    Ремонтные работы: Обозначены специальными иконками с указанием типа работ и сроков.   
+
+                    Рядом с интерактивной картой расположены фильтры, позволяющие настроить отображение информации на карте:
+
+                    Тип инцидента: (пробки, ДТП, ремонтные работы, иное)
+
+                    Уровень загруженности: (легкий, средний, сильный)
+                    
+                    Время суток: (выбор интервала времени)
+                </p>
+                <h4>Прогнозирование</h4> 
+                <p>Прогнозирование позволяет выбрать определенный временной интервал и ряд других факторов влияния(погода, день недели, время суток и т.д.), на основании которых будет предсказываться вероятность каких-либо происшествий происшествий на тех или иных участках дорог.</p>
+                <h4>Генерация отчетов</h4>
+                <p>В отчетах автоматически собирается информация по реагированию на любые происшествия на дорогах за каждый день в текстовом формате. Сгенерировать отчет можно вручную, указав период в соотвествующей форме.</p>
+            </div>
+        </div>
+    </section>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+    <script>
+        const tooltips = document.querySelectorAll(".tt")
+        tooltips.forEach(t=>{
+            new bootstrap.Tooltip(t)
+        })
+    </script>
+</body>
+</html>

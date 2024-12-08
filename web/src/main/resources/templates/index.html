@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="/css/main.min.css" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@200;400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+    <script type="module" src="/js/map.js"></script>
+    <script type="module" src="/js/server.js"></script>
+
+    <title>ЦОДД ЛК</title>
+
+    <style>
+        section {
+            padding: 50px 0;
+        }
+    </style>
+</head>
+<body>
+
+<!-- Navbar -->
+<nav class="navbar navbar-expand-sm bg-primary navbar-dark sticky-top">
+    <div class="container-fluid">
+        <a class="navbar-brand text-light" href="#">
+            <img src="/assets/logo.png" style="height: 50px;" alt="N/A" class="logo">
+            <span>ЛИЧНЫЙ КАБИНЕТ ОПЕРАТОРА <span class="text-dark fw-bold">ЦОДД</span></span>
+        </a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasNavbar" aria-controls="offcanvasNavbar" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="offcanvas offcanvas-end bg-primary text-light" tabindex="-1" id="offcanvasNavbar" aria-labelledby="offcanvasNavbarLabel">
+            <div class="offcanvas-header" data-bs-theme="dark">
+                <h5 class="offcanvas-title fw-bold" id="offcanvasNavbarLabel">МЕНЮ</h5>
+                <button type="button" class="btn-close border" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+            </div>
+            <div class="offcanvas-body">
+                <ul class="navbar-nav justify-content-end flex-grow-1 pe-3">
+                    <li class="nav-item">
+                        <a class="nav-link text-light fw-light fs-5" href="index">Главная</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link text-light fw-light fs-5" href="instruction">Инструкция и документация</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</nav>
+
+<!-- Map Section -->
+<div id="map" style="height: 650px;"></div>
+
+<!-- Success Message -->
+<div id="successMessage" class="alert alert-success alert-dismissible fade show" role="alert" style="display: none; margin: 0;">
+    Сообщение успешно отправлено!
+    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+</div>
+
+<!-- Error Message -->
+<div id="errorMessage" class="alert alert-danger alert-dismissible fade show" role="alert" style="display: none; margin: 0;">
+    Ошибка при отправке сообщения.
+    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+</div>
+
+<!-- Events Form Section -->
+<section id="events" class="bg-light">
+    <div class="container">
+        <div class="text-center">
+            <p class="fs-1 fw-bold">ПОДАЧА ОБРАЩЕНИЯ</p>
+        </div>
+        <div class="row justify-content-center mb-4 fs-5">
+            <div class="col-lg-8 col-md-10">
+                <form id="contactForm" action="javascript:void(0)" method="post">
+                    <label for="subject" class="form-label fs-5">Тип происшествия:</label>
+                    <div class="mb-3 input-group">
+                            <span class="input-group-text">
+                                <i class="bi bi-chat-right-text-fill"></i>
+                            </span>
+                        <select id="subject" name="subject" class="form-select fs-5 fw-light">
+                            <option value="accident" selected>ДТП</option>
+                            <option value="road-works">Дорожные работы</option>
+                            <option value="other">Иное</option>
+                        </select>
+                    </div>
+
+                    <label for="place" class="form-label fs-5">Место:</label>
+                    <div class="mb-3 input-group">
+                            <span class="input-group-text">
+                                <i class="bi bi-geo-alt-fill"></i>
+                            </span>
+                        <input type="text" name="place" class="form-control fs-5 fw-light" id="place" placeholder="Введите место происшествия...">
+                    </div>
+
+                    <label for="time" class="form-label fs-5">Время:</label>
+                    <div class="mb-3 input-group">
+                            <span class="input-group-text">
+                                <i class="bi bi-clock-fill"></i>
+                            </span>
+                        <input type="text" name="time" class="form-control fs-5 fw-light" id="time" placeholder="Введите время происшествия...">
+                    </div>
+
+                    <label for="query" class="form-label fs-5">Дополнительные сведения:</label>
+                    <textarea name="query" id="query" class="form-control mb-4 fs-5 fw-light" style="height: 250px; resize: none;" placeholder="Введите дополнительные сведения..."></textarea>
+
+                    <div class="text-center">
+                        <button type="submit" class="btn btn-primary btn-lg text-light fw-bold fs-5">ОТПРАВИТЬ</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</section>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+<script>
+    document.addEventListener('DOMContentLoaded', () => {
+        const form = document.getElementById('contactForm');
+        const successMessage = document.getElementById('successMessage');
+        const errorMessage = document.getElementById('errorMessage');
+
+        form.addEventListener('submit', async function (e) {
+            e.preventDefault();
+
+            const formData = new FormData(this);
+            const data = {
+                subject: formData.get('subject'),
+                place: formData.get('place'),
+                time: formData.get('time'),
+                query: formData.get('query')
+            };
+
+            try {
+                console.log("Sending data: ", data);
+                const response = await fetch('http://localhost:8080/api/forms', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify(data)
+                });
+
+                console.log(response);  // Логируем ответ сервера
+
+                if (response.ok) {
+                    // Показать успешное сообщение
+                    successMessage.style.display = 'block';
+                    // Очистить форму
+                    form.reset();
+                } else {
+                    // Показать ошибку
+                    const errorData = await response.json();
+                    console.log('Error response:', errorData);
+                    errorMessage.style.display = 'block';
+                }
+            } catch (error) {
+                console.error('Error:', error);
+                errorMessage.style.display = 'block';
+            }
+        });
+    });
+</script>
+
+</body>
+</html>
